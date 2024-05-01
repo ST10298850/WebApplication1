@@ -5,20 +5,33 @@ namespace WebApplication1.Controllers
 {
     public class userController : Controller
     {
-        public Table_1 usrtbl = new Table_1();
+        public UserTable usrtbl = new UserTable();
+        public LoginModel lm = new LoginModel();
 
         [HttpPost]
-        public ActionResult About(Table_1 Users)
+        public ActionResult SignUp(UserTable Users)
         {
+            //Connected to about Page 
             var result = usrtbl.insert_User(Users);
-            return RedirectToAction("Index", "Home");
-
+           return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet]
-        public IActionResult About()
+        [HttpPost]
+        public ActionResult Login(LoginModel l)
         {
-            return View(usrtbl);
+
+            int userId = lm.SelectUser(l);
+            if (userId != -1)
+            {
+                // Redirect After User Found
+                TempData["userID"] = userId;
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                // User not found
+                return Content("User Not Found", "text / html");
+            }
         }
     }
 }

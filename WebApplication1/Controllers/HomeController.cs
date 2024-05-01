@@ -30,6 +30,20 @@ namespace WebApplication1.Controllers
 
         public IActionResult MyWork() 
         {
+            List<productTable> products = productTable.GetAllProducts();
+            ViewData["products"] = products;
+            return View();
+        }
+        public IActionResult Account()
+        {
+            return View();
+        }
+        public IActionResult Cart()
+        {
+            return View();
+        }
+        public IActionResult LoginSignUp()
+        {
             return View();
         }
 
