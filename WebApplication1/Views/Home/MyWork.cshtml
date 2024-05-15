@@ -4,14 +4,23 @@
 }
 <h1>My Work </h1>
 <body>
-
-    <p>This page will be used to showcase what KhumaloCraft offers to it's clients.</p>
-    <img src="/pictures/KhumaloCraftedPics1.jpg" width="900"  alt="Crafted goods">
+    <body>
+    <form asp-controller="product" asp-action="" method="post">
+        <p>Insert new products</p>
+        <input type="text" name="Name" placeholder="productName" required>
+        <input type="text" name="Price" placeholder="Price" required>
+        <input type="text" name="Category" placeholder="Category" required>
+        <input type="text" name="Availability" placeholder="Availability" required>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+@*     <p>This page will be used to showcase what KhumaloCraft offers to it's clients.</p>
+    <img src="/pictures/KhumaloCraftedPics1.jpg" width="900"  alt="Crafted goods"> *@
   
 </body>
 
 <title>Product Prices</title>
-<style>
+    @* <style> *@
     table {
         border-collapse: collapse;
         width: 100%;
@@ -30,7 +39,7 @@
 
 <body>
     <h2>Product Prices</h2>
-    <table>
+    @* <table> *@
         <tr>
             <th>Product</th>
             <th>Price</th>

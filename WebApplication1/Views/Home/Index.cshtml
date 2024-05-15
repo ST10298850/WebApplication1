@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+var userID = ViewData["userID"];
 }
 
 <div class="text-center">
@@ -7,3 +8,7 @@
     <p>This will be the landing page for KhumaloCraft.</p>
     <p>Luke Edward Petzer - ST10298850</p>
 </div>
+
+@if (userID != null){
+    <p>user ID: @userID</p>
+}

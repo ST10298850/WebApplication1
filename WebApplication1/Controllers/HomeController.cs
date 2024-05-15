@@ -13,8 +13,10 @@ namespace WebApplication1.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int userID)
         {
+
+            ViewData["UserID"] = userID;
             return View();
         }
 
@@ -42,7 +44,11 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
-        public IActionResult LoginSignUp()
+        public IActionResult Login()
+        {
+            return View();
+        }
+        public IActionResult SignUp()
         {
             return View();
         }

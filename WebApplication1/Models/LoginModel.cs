@@ -12,22 +12,22 @@ namespace WebApplication1.Models
         public string userName { get; set; }
         public string password { get; set; }
 
-        public int SelectUser(LoginModel l)
+        public int SelectUser(string userName, string password)
         {
-            int userId = -1; // Default value if user is not found
+            int userID = -1; // Default value if user is not found
             using (SqlConnection con = new SqlConnection(con_string))
             {
                 string sql = "SELECT userID FROM UserTable WHERE userName = @userName AND userPassword = @userPassword";
                 SqlCommand cmd = new SqlCommand(sql, con);
-                cmd.Parameters.AddWithValue("@userName", l.userName);
-                cmd.Parameters.AddWithValue("@userPassword", l.password);
+                cmd.Parameters.AddWithValue("@userName", userName);
+                cmd.Parameters.AddWithValue("@userPassword", password);
                 try
                 {
                     con.Open();
                     object result = cmd.ExecuteScalar();
                     if (result != null && result != DBNull.Value)
                     {
-                        userId = Convert.ToInt32(result);
+                        userID = Convert.ToInt32(result);
                     }
                 }
                 catch (Exception ex)
@@ -37,7 +37,7 @@ namespace WebApplication1.Models
                     throw ex;
                 }
             }
-            return userId;
+            return userID;
         }
     }
 }
