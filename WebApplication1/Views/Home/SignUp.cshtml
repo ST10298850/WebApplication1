@@ -1,0 +1,15 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<body>
+    <form asp-controller="user" asp-action="SignUp" method="post">
+        <p>Please signup:</p>
+        <input type="text" name="userName" placeholder="Username" required>
+        <input type="text" name="email" placeholder="example@gmail.com" required>
+        <input type="text" name="password" placeholder="password" required>
+        <button type="submit">Submit</button>
+    </form>
+</body>

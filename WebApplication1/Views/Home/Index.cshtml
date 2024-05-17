@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    int? userID = ViewData["userID"] as int?; // Getting userID from ViewData
+    var products = ViewData["products"] as List<WebApplication1.Models.productTable>;
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>This will be the landing page for KhumaloCraft.</p>
+    <p>Luke Edward Petzer - ST10298850</p>
+</div>
+
+@if (userID.HasValue)
+{
+    <p>User ID: @userID</p>
+}
+else
+{
+    <p>User has not logged in.</p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Availability</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (products != null)
+        {
+            foreach (var product in products)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Price</td>
+                    <td>@product.Category</td>
+                    <td>@product.Availability</td>
+                    <td>
+                        <form asp-controller="Transaction" asp-action="PlaceOrder" method="post">
+                            <input type="hidden" name="userID" value="@userID" />
+                            <input type="hidden" name="productID" value="@product.ProductID" />
+                            <input type="hidden" name="quantity" value="1" />
+                            <button type="submit">Place Order</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">No products available</td>
+            </tr>
+        }
+    </tbody>
+</table>
