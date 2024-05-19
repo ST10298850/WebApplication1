@@ -1,6 +1,8 @@
-﻿@{
+﻿
+
+@{
     ViewData["Title"] = "Home Page";
-    int? userID = ViewData["userID"] as int?; // Getting userID from ViewData
+    int? userID = ViewData["userID"] as int?;
     var products = ViewData["products"] as List<WebApplication1.Models.productTable>;
 }
 
@@ -41,7 +43,6 @@ else
                     <td>@product.Availability</td>
                     <td>
                         <form asp-controller="Transaction" asp-action="PlaceOrder" method="post">
-                            <input type="hidden" name="userID" value="@userID" />
                             <input type="hidden" name="productID" value="@product.ProductID" />
                             <input type="hidden" name="quantity" value="1" />
                             <button type="submit">Place Order</button>

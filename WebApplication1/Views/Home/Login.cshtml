@@ -1,6 +1,6 @@
-﻿@*
+﻿@* 
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+
 @{
 }
 @if (TempData["ErrorMessage"] != null)
@@ -16,4 +16,24 @@
     </form>
 </body>
 	<p><a href="https://localhost:7057/Home/SignUp">Sign Up.</a></p>
+
+  *@
+  @{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<form asp-controller="Login" asp-action="Login" method="post">
+    <p>Please login:</p>
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <button type="submit">Submit</button>
+</form>
+<p><a href="https://localhost:7057/Home/SignUp">Sign Up.</a></p>
 
