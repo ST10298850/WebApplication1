@@ -167,6 +167,19 @@ namespace WebApplication1.Controllers
             // Redirect to the login page or home page after sign-out
             return RedirectToAction("Login", "Home");
         }
+        public IActionResult Transaction()
+        {
+            int? userID = HttpContext.Session.GetInt32("UserID");
+
+            if (userID == null || userID <= 0)
+            {
+                return View();
+            }
+
+            var transactionModel = new TransactionModel();
+            var transactions = transactionModel.GetUserTransactions(userID.Value);
+            return View(transactions);
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
