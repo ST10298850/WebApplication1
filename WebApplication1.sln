@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{E5F1BE58-A80A-4C9D-A016-0724D303CDA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ST10298850-Cloud-Application", "WebApplication1\ST10298850-Cloud-Application.csproj", "{E5F1BE58-A80A-4C9D-A016-0724D303CDA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

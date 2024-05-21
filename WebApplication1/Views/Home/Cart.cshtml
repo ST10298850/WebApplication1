@@ -1,4 +1,4 @@
-﻿@model List<WebApplication1.Models.TransactionModel>
+﻿@model List<WebApplication1.Models.CartModel>
 
 @{
     ViewData["Title"] = "Cart";
@@ -6,34 +6,36 @@
 
 <h2>Cart</h2>
 
-@if (Model != null && Model.Count > 0)
-{
-    <table class="table">
-        <thead>
+<table class="table">
+    <thead>
+        <tr>                            
+            <form asp-controller="Cart" asp-action="ProcessTransaction" method="post">
+                <button type="submit" class="btn btn-success">Process Transaction</button>
+            </form>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>Product Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
+                <td>@item.ProductName</td>
+                <td>@item.ProductPrice.ToString("C")</td>
+                <td>
+                    <form asp-action="UpdateCartItem" method="post" class="form-inline">
+                        <input type="hidden" name="cartID" value="@item.CartID" />
+                        <input type="number" name="quantity" value="@item.Quantity" min="1" class="form-control" />
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.ProductName</td>
-                    <td>@item.ProductPrice.ToString("C")</td>
-                    <td>@item.Quantity</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>
 
-        <form asp-controller="Home" asp-action="ClearCart" method="post">
-        <button type="submit" class="btn btn-danger">Clear Cart</button>
-    </form>
-    //Code to create a button on cart page to clear cart - once user has logged in. 
-}
-else
-{
-    <p>No items in your cart.</p>
-}
+<form asp-action="ClearCart" method="post">
+    <button type="submit" class="btn btn-danger">Clear Cart</button>
+</form>

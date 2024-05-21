@@ -42,7 +42,7 @@ else
                     <td>@product.Category</td>
                     <td>@product.Availability</td>
                     <td>
-                        <form asp-controller="Transaction" asp-action="PlaceOrder" method="post">
+                        <form asp-controller="Cart" asp-action="AddToCart" method="post">
                             <input type="hidden" name="productID" value="@product.ProductID" />
                             <input type="hidden" name="quantity" value="1" />
                             <button type="submit">Place Order</button>
