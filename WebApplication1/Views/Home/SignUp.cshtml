@@ -1,15 +1,32 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Sign Up";
 }
 
-<body>
-    <form asp-controller="user" asp-action="SignUp" method="post">
-        <p>Please signup:</p>
-        <input type="text" name="userName" placeholder="Username" required>
-        <input type="text" name="email" placeholder="example@gmail.com" required>
-        <input type="password" name="password" placeholder="password" required>
-        <button type="submit">Submit</button>
-    </form>
-</body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card mt-5">
+                <div class="card-header text-center">
+                    <h2>Sign Up</h2>
+                </div>
+                <div class="card-body">
+                    <form asp-controller="User" asp-action="SignUp" method="post">
+                        <div class="form-group">
+                            <label for="userName">Username</label>
+                            <input type="text" name="userName" class="form-control" placeholder="Enter username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" class="form-control" placeholder="example@gmail.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

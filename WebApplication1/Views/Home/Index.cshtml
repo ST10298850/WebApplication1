@@ -1,4 +1,4 @@
-﻿
+﻿@model List<WebApplication1.Models.productTable>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -37,15 +37,22 @@ else
             foreach (var product in products)
             {
                 <tr>
-                    <td>@product.Name</td>
-                    <td>@product.Price</td>
+                    <td>
+                        <div class="product-container">
+                            <span class="product-name" data-img-url="@product.ProductImageUrl">
+                                @product.Name
+                            </span>
+                            <div class="image-preview"></div>
+                        </div>
+                    </td>
+                    <td>R @product.Price</td>
                     <td>@product.Category</td>
                     <td>@product.Availability</td>
                     <td>
-                        <form asp-controller="Cart" asp-action="AddToCart" method="post">
+                        <form asp-controller="Cart" asp-action="AddToCart" method="post" class="place-order-form">
                             <input type="hidden" name="productID" value="@product.ProductID" />
                             <input type="hidden" name="quantity" value="1" />
-                            <button type="submit">Place Order</button>
+                            <button type="button" onclick="handlePlaceOrder(@(userID.HasValue ? userID.Value : 0), this.form)">Place Order</button>
                         </form>
                     </td>
                 </tr>
@@ -59,3 +66,57 @@ else
         }
     </tbody>
 </table>
+
+<style>
+    .product-container {
+        position: relative;
+        display: inline-block;
+    }
+    .product-name {
+        cursor: pointer;
+    }
+    .image-preview {
+        width: 200px;
+        height: 200px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-color: white;
+        background-position: center;
+        position: absolute;
+        left: 100%;
+        top: 0;
+        display: none;
+        border: 1px solid #ccc;
+        z-index: 1000;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var productNames = document.querySelectorAll('.product-name');
+
+        productNames.forEach(function (productName) {
+            productName.addEventListener('mouseover', function () {
+                var imageUrl = this.getAttribute('data-img-url');
+                var imagePreview = this.nextElementSibling;
+                imagePreview.style.backgroundImage = 'url(' + imageUrl + ')';
+                imagePreview.style.display = 'block';
+            });
+
+            productName.addEventListener('mouseout', function () {
+                var imagePreview = this.nextElementSibling;
+                imagePreview.style.display = 'none';
+            });
+        });
+    });
+
+    function handlePlaceOrder(userID, form) {
+        if (userID && userID > 0) {
+            alert("Order placed successfully!");
+            form.submit();
+        } else {
+            alert("You need to log in before placing an order.");
+            window.location.href = '@Url.Action("Login", "Home")';
+        }
+    }
+</script>

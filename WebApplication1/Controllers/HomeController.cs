@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Diagnostics;
 using WebApplication1.Models;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using Microsoft.AspNetCore.Http;
 
 namespace WebApplication1.Controllers
 {
@@ -21,7 +24,7 @@ namespace WebApplication1.Controllers
             ViewData["userID"] = userID;
             List<productTable> products = productTable.GetAllProducts();
             ViewData["products"] = products;
-            return View();
+            return View(products);
         }
 
         public IActionResult Privacy()
@@ -40,6 +43,7 @@ namespace WebApplication1.Controllers
             ViewData["products"] = products;
             return View();
         }
+
         public IActionResult Cart()
         {
             int? userID = HttpContext.Session.GetInt32("UserID");
@@ -51,14 +55,53 @@ namespace WebApplication1.Controllers
 
             var cartModel = new CartModel();
             var cartItems = cartModel.GetUserCartItems(userID.Value);
-            return View(cartItems); // Return the Cart view directly
+            return View(cartItems);
         }
 
         public IActionResult Account()
         {
+            int? userID = HttpContext.Session.GetInt32("UserID");
+
+            if (userID == null || userID <= 0)
+            {
+                return RedirectToAction("Login");
+            }
+
+            var userModel = new userModel();
+            var user = userModel.GetUserByID(userID.Value);
+            if (user == null)
+            {
+                // Handle the case where the user is not found
+                return RedirectToAction("Login");
+            }
+
+            ViewData["User"] = user;
+
+            var orderModel = new orderModel();
+            var orders = orderModel.GetUserOrders(userID.Value);
+            ViewData["Orders"] = orders;
+
             return View();
         }
-       
+
+
+        [HttpPost]
+        public IActionResult UpdateAccount(userModel updatedUser)
+        {
+            int? userID = HttpContext.Session.GetInt32("UserID");
+
+            if (userID == null || userID <= 0)
+            {
+                return RedirectToAction("Login");
+            }
+
+            updatedUser.userID = userID.Value;
+
+            var userModel = new userModel();
+            userModel.UpdateUser(updatedUser);
+
+            return RedirectToAction("Account");
+        }
 
         public IActionResult Login()
         {

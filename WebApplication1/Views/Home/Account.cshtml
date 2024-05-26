@@ -1,5 +1,61 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "My Account";
+    var user = ViewData["User"] as WebApplication1.Models.userModel;
+    var orders = ViewData["Orders"] as List<WebApplication1.Models.orderModel>;
 }
+
+<div class="container">
+    <h2 class="mt-4">My Account</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Personal Information</h4>
+                </div>
+                <div class="card-body">
+                    @if (user != null)
+                    {
+                        <form asp-controller="Home" asp-action="UpdateAccount" method="post">
+                            <div class="form-group">
+                                <label for="userName">Username</label>
+                                <input type="text" name="userName" class="form-control" value="@user.userName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="Email">Email</label>
+                                <input type="email" name="Email" class="form-control" value="@user.Email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="Password">New Password</label>
+                                <input type="password" name="Password" class="form-control" placeholder="Enter new password">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <p>User information is not available.</p>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Order History</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        @foreach (var order in orders)
+                        {
+                            <li class="list-group-item">
+                                Order ID: @order.orderID<br />
+                                Date: @order.orderDate<br />
+                                Total: $@order.totalAmount
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

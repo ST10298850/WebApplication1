@@ -7,19 +7,60 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
-@*     <style>
-		.sticky-top {
-			position: -webkit-sticky;
-			position: sticky;
-			top: 0;
-			z-index: 1020;
-		}
-	</style> *@
+    @* <style>
+        :root {
+            --background-color: #ffffff;
+            --text-color: #000000;
+            --navbar-bg-color: #f8f9fa;
+            --navbar-text-color: #000000;
+            --table-bg-color: #ffffff;
+            --table-text-color: #000000;
+            --table-border-color: #dee2e6;
+        }
+
+        body.dark-mode {
+            --background-color: #121212;
+            --text-color: #ffffff;
+            --navbar-bg-color: #333333;
+            --navbar-text-color: #ffffff;
+            --table-bg-color: #1c1c1c;
+            --table-text-color: #ffffff;
+            --table-border-color: #444444;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .button-toggle {
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 0 20px;
+            background-color: var(--text-color);
+            color: var(--background-color);
+            border: none;
+            border-radius: 5px;
+        }
+
+        .navbar {
+            background-color: var(--navbar-bg-color);
+        }
+
+        .navbar .nav-link, .navbar .navbar-brand {
+            color: var(--navbar-text-color) !important;
+        }
+
+
+
+        table th, table td {
+            border-color: var(--table-border-color);
+        }
+    </style> *@
 </head>
 <body>
     <header>
-
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">KhumaloCraft</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -31,9 +72,6 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @* <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Contact Us</a>
-                        </li> *@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About Us</a>
                         </li>
@@ -54,6 +92,9 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <button class="button-toggle" id="modeToggle">Toggle Theme</button>
+                        </li>
                         @if (Context.Session.GetInt32("UserID") != null)
                         {
                             <li class="nav-item">
@@ -80,6 +121,27 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const toggleButton = document.getElementById("modeToggle");
+            const body = document.body;
+
+            const currentMode = localStorage.getItem("mode") || "light";
+            if (currentMode === "dark") {
+                body.classList.add("dark-mode");
+            }
+
+            toggleButton.addEventListener("click", function() {
+                body.classList.toggle("dark-mode");
+
+                if (body.classList.contains("dark-mode")) {
+                    localStorage.setItem("mode", "dark");
+                } else {
+                    localStorage.setItem("mode", "light");
+                }
+            });
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

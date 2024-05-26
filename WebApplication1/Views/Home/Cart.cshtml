@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Cart";
+            double totalPrice = 0;
+
 }
 
 <h2>Cart</h2>
@@ -15,27 +17,37 @@
             <th>Product Name</th>
             <th>Price</th>
             <th>Quantity</th>
-            <th>Update</th>
+
         </tr>
     </thead>
     <tbody>
+
+
         @foreach (var item in Model)
         {
+            totalPrice += ((double)item.ProductPrice * item.Quantity);
             <tr>
                 <td>@item.ProductName</td>
-                <td>@item.ProductPrice.ToString("C")</td>
+                <td>R @(item.ProductPrice * item.Quantity)</td>
                 <td>
-                    <form asp-action="UpdateCartItem" method="post" class="form-inline">
+                    <form asp-controller="Cart" asp-action="UpdateCartItem" method="post" class="form-inline">
                         <input type="hidden" name="cartID" value="@item.CartID" />
                         <input type="number" name="quantity" value="@item.Quantity" min="1" class="form-control" />
                         <button type="submit" class="btn btn-primary">Update</button>
                     </form>
+                    
                 </td>
             </tr>
-        }
+            }
+            <tr>
+                
+                <td>Total Price:    R @totalPrice</td>
+            </tr>
+
+        
     </tbody>
 </table>
 
-<form asp-action="ClearCart" method="post">
+<form asp-controller="Cart" asp-action="ClearCart" method="post">
     <button type="submit" class="btn btn-danger">Clear Cart</button>
 </form>

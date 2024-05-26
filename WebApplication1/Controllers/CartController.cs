@@ -40,7 +40,7 @@ namespace WebApplication1.Controllers
             var cartModel = new CartModel();
             cartModel.UpdateCartItem(cartID, quantity);
 
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Cart","Home");
         }
 
         [HttpPost]
@@ -84,7 +84,7 @@ namespace WebApplication1.Controllers
                 cartModel.ClearUserCart(userID.Value);
             }
 
-            return RedirectToAction("Cart");
+            return RedirectToAction("Cart","Home");
         }
     }
 }

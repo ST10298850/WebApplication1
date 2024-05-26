@@ -1,17 +1,81 @@
-﻿
-@{
-    ViewData["Title"] = "About Us";
-
-}
-<h1>About Us </h1>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - KhumaloCraft</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #eefafc;
+            font-family: Arial, sans-serif;
+        }
+        .hero-section {
+            background: url('path_to_hero_image.jpg') no-repeat center center/cover;
+            color: #030f11;
+            padding: 100px 0;
+            text-align: center;
+        }
+        .content-section {
+            padding: 50px 0;
+        }
+        .content-section h2 {
+            color: #031316;
+            margin-bottom: 30px;
+        }
+        .content-section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #031316;
+        }
+        .content-section .btn {
+            background-color: #31b7df;
+            color: #fff;
+            border: none;
+        }
+    </style>
+</head>
 <body>
-    <p>This page is dedicated to giving information about KhumaloCraft and what their goal as business is to achieve.</p>
-    <p>Luke Edward Petzer - ST10298850</p>
-@*     <form action="About" method="post">
-        <p>Please enter your first and last name:</p>
-        <input type="text" name="Name" placeholder="" required />
-        <input type="text" name="Surname" placeholder="" required />
-        <input type="text" name="Email" placeholder="" required />
-        <button type="submit">Submit</button>
-    </form> *@
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <h1 class="display-4">Welcome to KhumaloCraft</h1>
+            <p class="lead">Connecting Artisans Worldwide with a Discerning Audience</p>
+        </div>
+    </div>
+
+    <!-- Content Section -->
+    <div class="content-section">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>James Khumalo, a visionary entrepreneur, set out to establish KhumaloCraft Emporium as a global e-commerce platform to showcase handcrafted products. His dream involves connecting artisans worldwide with a discerning audience. To make this dream a reality, KhumaloCraft Emporium needs a scalable, accessible, and user-friendly platform.</p>
+
+            <p>Achieving this requires an understanding of basic cloud computing and the various service models, as well as a platform that is globally accessible, usable, and ensures a positive user experience. Once the craftwork and its related details have been built into a suitable platform, it is necessary to deploy the platform to enable accessibility and advertise the work.</p>
+
+            <p>James envisioned a platform accessible to a global audience, scalable to accommodate growth, and ensuring a secure and enjoyable shopping experience. The challenges include making crucial decisions on cloud service models and deployment strategies, as well as designing an efficient database schema for product information and user data, while ensuring scalability with the platform's growth. The development team faces technical challenges such as global accessibility, scalability, and ensuring a seamless user experience.</p>
+
+            <p>Lastly, James would like to include advanced services and functionalities to enhance user experience with features such as search capabilities, notifications, serverless services, and automation. The goal of KhumaloCraft is to create a web application that is accessible, stores artisans' craftwork, and allows customers globally to access and order their craftwork.</p>
+
+            <p>The following tasks need to be completed:</p>
+            <ul>
+                <li>Demonstrate an understanding of cloud computing and its relevance in solving this problem.</li>
+                <li>Development of a basic web application to provide background information on the company and its services.</li>
+                <li>Deploying the web application on a suitable Azure platform.</li>
+                <li>Development of a database and its integration with the web application.</li>
+                <li>Adding the necessary functionality.</li>
+                <li>Including various advanced features of Azure such as search engines and logic apps to add advanced features to the web application.</li>
+            </ul>
+
+            <a href="contact.html" class="btn btn-primary mt-4">Contact Us</a>
+        </div>
+    </div>
+
+    <footer class="text-center py-4">
+        <p>&copy; 2024 KhumaloCraft Emporium. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    @Html.Raw("<script src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js'></script>")
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+</html>
